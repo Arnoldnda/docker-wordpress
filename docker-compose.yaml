@@ -4,6 +4,7 @@ services:
     #Création du service pour la base de donnée mysql 
     db:
         image: mysql                    # Image officielle MySQL
+        container_name: db_wordpress    # nom du conteneur
         restart: always                 # reprend toujours le conteneur jusqu'à son retrait
         volumes:
             - db_data:/var/lib/mysql     # Volume pour persister les données de la base
@@ -12,3 +13,20 @@ services:
             MYSQL_DATABASE: wordpressdb             # nom de la base de donnée 
             MYSQL_USER: berni                       # nom utilisateur
             MYSQL_PASSWORD: arnold276653            # mot de passe de l'utilisateur 
+    
+    wordpress: 
+        image: wordpress                            # Image officielle MySQL
+        container_name: app_wordpress
+        restart: always 
+        depends_on:
+            - db                                     # s'assurer que mysql demarre avant wordpress 
+        port: 
+            - "8080:80"                             # Expose le port 80 du conteneur sur le port 8080 de la machine hôte
+        environment:
+            WORDPRESS_DB_HOST: db
+            WORDPRESS_DB_USER: berni
+            WORDPRESS_DB_PASSWORD: arnold276653
+            WORDPRESS_DB_NAME: wordpressdb
+
+volumes: 
+    db_data:

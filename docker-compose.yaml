@@ -14,9 +14,10 @@ services:
             MYSQL_USER: berni                       # nom utilisateur
             MYSQL_PASSWORD: arnold276653            # mot de passe de l'utilisateur 
     
+    #Créer un service pour wordpress
     wordpress: 
         image: wordpress                            # Image officielle MySQL
-        container_name: app_wordpress
+        container_name: app_wordpress           
         restart: always 
         depends_on:
             - db                                     # s'assurer que mysql demarre avant wordpress 

@@ -1,1 +1,14 @@
+#Créaton des services du projet 
+services: 
 
+    #Création du service pour la base de donnée mysql 
+    db:
+        image: mysql                    # Image officielle MySQL
+        restart: always                 # reprend toujours le conteneur jusqu'à son retrait
+        volumes:
+            - db_data:/var/lib/mysql     # Volume pour persister les données de la base
+        environment:
+            MYSQL_ROOT_PASSWORD: passwdroot         # mot de passe pour le MYSQL root 
+            MYSQL_DATABASE: wordpressdb             # nom de la base de donnée 
+            MYSQL_USER: berni                       # nom utilisateur
+            MYSQL_PASSWORD: arnold276653            # mot de passe de l'utilisateur 
